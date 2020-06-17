@@ -43,8 +43,8 @@ class KMeansClustering:
         self.grouped_data['cluster'] = labels
         # Generosity is y, social_support is x
         fig, ax = plt.subplots()
-        ax.scatter(X[:, 2], X[:, 5], c=labels.astype(np.float), edgecolor='k')
-        # ax.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red')
+        sc = ax.scatter(X[:, 2], X[:, 5], c=labels.astype(np.float), edgecolor='k')
+        fig.colorbar(sc, ax=ax)
 
         ax.set_xlabel('Social support', fontsize=12)
         ax.set_ylabel('Generosity', fontsize=12)
