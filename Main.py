@@ -8,7 +8,6 @@ from KMeansClustering import KMeansClustering
 
 
 class Main:
-
     def __init__(self, master):
         # master is the root
         self.master = master
@@ -20,8 +19,6 @@ class Main:
         self.path_entry = Entry(master, textvariable=self.path_text)
         self.file_path_btn = self.path_btn = Button(master, text="Browse",
                                                     command=lambda: self.open_file_dialog(self.path_text))
-        # check if the user didnt gave a bad path!
-
         # number of cluster k
         self.number_k_cluster = IntVar()
         self.k_cluster_label = Label(master, text="Number of clusters k: ")
@@ -77,10 +74,6 @@ class Main:
             showerror("K Means Clustering",
                       message=str("Please load an excel file to continue"))
             pass
-        except:
-            # error - not int
-            showerror("K Means Clustering", message=str("Please enter and integer at Number of clusters k or Number "
-                                                        "of runs"))
 
     def start_clustering(self):
         try:
