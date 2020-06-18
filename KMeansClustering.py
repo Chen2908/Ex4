@@ -11,14 +11,20 @@ class KMeansClustering:
     def __init__(self, file_path):
         self.folder_path = '/'.join(file_path.split('/')[0:-1]) + '/'
         self.data = pd.read_excel(file_path)
-        self.grouped_data = self.pre_processing()
-        self.grouped_data.to_csv('countries.csv')
+        self.grouped_data = pd.DataFrame()
+
+    def check_file(self):
+        if self.data.empty or len(self.data.columns) != 16:
+            return 'bad input'
+        else:
+            return 'good input'
 
     # data pre-processing
     def pre_processing(self):
         self.fill_na()
         self.standardization()
-        return self.group_by_country()
+        self.grouped_data = self.group_by_country()
+        return 'done'
 
     # fill na value of numeric columns with their mean
     def fill_na(self):
@@ -49,7 +55,7 @@ class KMeansClustering:
         ax.set_xlabel('Social support', fontsize=12)
         ax.set_ylabel('Generosity', fontsize=12)
         fig.suptitle('K-Means clustering- Generosity as a function of Social support', fontsize=12, fontweight='bold')
-        first_path = self.folder_path + 'clusters'
+        first_path = self.folder_path + 'clusters.png'
         plt.savefig(first_path)
         plt.close(fig)
 
