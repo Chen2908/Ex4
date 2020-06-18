@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E, filedialog, messagebox
 from tkinter.messagebox import showerror
 
+from PIL import ImageTk
+
 from KMeansClustering import KMeansClustering
 
 
@@ -58,11 +60,12 @@ class Main:
 
     def start_pre_process(self):
         try:
-            k_cluster = self.number_k_cluster.get()
-            run_number = self.runs_number_cluster.get()
-            if k_cluster < 2 or run_number < 1 or run_number > 100:
+            self.k_cluster = self.number_k_cluster.get()
+            self.run_number = self.runs_number_cluster.get()
+            if self.k_cluster < 2 or self.run_number < 1 or self.run_number > 100:
                 # maybe add max of k
                 raise ValueError
+            # pre process here!
             # when done!
             messagebox.showinfo(title="K Means Clustering", message="Preprocessing completed successfully!")
         except ValueError:
@@ -74,7 +77,18 @@ class Main:
                                                         "of runs"))
 
     def start_clustering(self):
-        messagebox.showinfo(title="K Means Clustering", message="Clustering completed successfully!")
+        try:
+            self.photo1_path, self.photo2_path = self.k_means_clustering.kmeans(self.k_cluster, self.run_number)
+            messagebox.showinfo(title="K Means Clustering", message="Clustering completed successfully!")
+            self.photo1 = ImageTk.PhotoImage(Image.open(self.photo1_path))
+            self.photo2 = ImageTk.PhotoImage(Image.open(self.photo2_path))
+            self.photo1_label = Label(root, image=self.photo1)
+            self.photo2_label = Label(root, image=self.photo2)
+            self.photo1_label.grid(row=5, column=0)
+            self.photo2_label.grid(row=5, column=1)
+        except:
+            # error - not int
+            showerror("K Means Clustering", message=str("Clustering not completed successfully!"))
 
 root = Tk()
 my_gui = Main(root)
