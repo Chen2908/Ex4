@@ -16,7 +16,7 @@ class Main:
 
         # path file
         self.path_text = StringVar()
-        self.path_label = Label(master, text="file path:")
+        self.path_label = Label(master, text="file path: ")
         self.path_entry = Entry(master, textvariable=self.path_text)
         self.file_path_btn = self.path_btn = Button(master, text="Browse",
                                                     command=lambda: self.open_file_dialog(self.path_text))
@@ -24,12 +24,12 @@ class Main:
 
         # number of cluster k
         self.number_k_cluster = IntVar()
-        self.k_cluster_label = Label(master, text="Number of clusters k")
+        self.k_cluster_label = Label(master, text="Number of clusters k: ")
         self.k_cluster_entry = Entry(master, textvariable=self.number_k_cluster)
 
         # number of runs
         self.runs_number_cluster = IntVar()
-        self.runs_number_label = Label(master, text="Number of runs")
+        self.runs_number_label = Label(master, text="Number of runs: ")
         self.runs_number_entry = Entry(master, textvariable=self.runs_number_cluster)
 
         self.per_process_btn = Button(master, text="Pre-process", command=lambda: self.start_pre_process())
@@ -101,7 +101,7 @@ class Main:
             self.photo1_label.grid(row=5, column=0, sticky=E)
             self.photo2_label.grid(row=5, column=1, sticky=W)
         except ValueError:
-            showerror("K Means Clustering", message=str("Please enter valid numbers in Number of clusters k or Number"
+            showerror("K Means Clustering", message=str("Please enter valid numbers in Number of clusters k or Number "
                                                         "of runs"))
         except:
             # error - not int
