@@ -13,8 +13,6 @@ class Main:
         # master is the root
         self.master = master
         self.master.title("K Means Clustering")
-        self.master.minsize(width=800, height=600)
-        self.master.maxsize(width=800, height=600)
 
         # path file
         self.path_text = StringVar()
@@ -40,19 +38,16 @@ class Main:
         # Grid
         self.path_label.grid(row=0, column=0, sticky=W)
         self.path_entry.grid(row=0, column=1, columnspan=2)
-        self.path_btn.grid(row=0, column=3)
+        self.path_btn.grid(row=0, column=3, sticky=E)
 
-        self.k_cluster_label.grid(row=1, column=0)
+        self.k_cluster_label.grid(row=1, column=0, sticky=W)
         self.k_cluster_entry.grid(row=1, column=1)
 
-        self.runs_number_label.grid(row=2, column=0)
+        self.runs_number_label.grid(row=2, column=0, sticky=W)
         self.runs_number_entry.grid(row=2, column=1)
 
         self.per_process_btn.grid(row=3, column=1, columnspan=2)
         self.cluster_btn.grid(row=4, column=1, columnspan=2)
-
-        # self.canvas = Canvas(master, width=600, height=400, background='white')
-        # self.canvas.grid(row=5, column=1)
 
         self.file_path = ''
         self.k_means_clustering = ''
@@ -71,7 +66,6 @@ class Main:
             elif self.k_means_clustering.check_file() == 'bad input':
                 raise TypeError
 
-            # pre process here!
             # when done!
             if self.k_means_clustering.pre_processing() == 'done':
                 messagebox.showinfo(title="K Means Clustering", message="Preprocessing completed successfully!")
@@ -93,9 +87,9 @@ class Main:
             self.k_cluster = self.number_k_cluster.get()
             self.run_number = self.runs_number_cluster.get()
 
-            if self.k_cluster < 2 or self.run_number < 1 or self.run_number > 100:
-                # maybe add max of k
+            if self.k_cluster < 2 or self.k_cluster > 260 or self.run_number < 1 or self.run_number > 100:
                 raise ValueError
+
             self.photo1_path, self.photo2_path = self.k_means_clustering.kmeans(self.k_cluster, self.run_number)
             messagebox.showinfo(title="K Means Clustering", message="Clustering completed successfully!")
             image1 = Image.open(self.photo1_path)
@@ -104,7 +98,6 @@ class Main:
             self.photo2 = ImageTk.PhotoImage(image2)
             self.photo1_label = Label(root, image=self.photo1)
             self.photo2_label = Label(root, image=self.photo2)
-            # self.canvas.create_image(image=self.photo1, anchor=NW)
             self.photo1_label.grid(row=5, column=0, sticky=E)
             self.photo2_label.grid(row=5, column=1, sticky=W)
         except ValueError:
@@ -117,5 +110,5 @@ class Main:
 
 root = Tk()
 my_gui = Main(root)
-root.geometry("800x600")
+root.geometry("1400x650")
 root.mainloop()
