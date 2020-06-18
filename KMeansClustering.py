@@ -66,6 +66,6 @@ class KMeansClustering:
         return first_path, second_path
 
 
-# filename = 'C:/Users/cheng/Documents/University/3rd/BI/Ex4/Dataset.xlsx'
+# filename = 'C:\\Users\\roman\\GitHub\\KMeansClustering\\Dataset.xlsx'
 # k = KMeansClustering(filename)
 # k.kmeans(3, 10)
