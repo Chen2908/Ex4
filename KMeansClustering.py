@@ -66,7 +66,7 @@ class KMeansClustering:
 
         # map
         choro_map = px.choropleth(self.grouped_data, locations="country id", color="cluster",
-                                  color_continuous_scale=px.colors.sequential.Aggrnyl, title='K-Means clustering by countries', )
+                                  color_continuous_scale=px.colors.sequential.Aggrnyl, title='K-Means clustering by countries')
         py.sign_in('chengal', 'bXvnMDGbtkb9zqZibQRt')
         second_path = self.folder_path + 'choropleth.png'
         py.image.save_as(choro_map, filename=second_path)
