@@ -13,6 +13,7 @@ class KMeansClustering:
         self.data = pd.read_excel(file_path)
         self.grouped_data = pd.DataFrame()
 
+    # check that the file is not empty and the number of columns is valid
     def check_file(self):
         if self.data.empty or len(self.data.columns) != 16:
             return 'bad input'
@@ -71,7 +72,3 @@ class KMeansClustering:
         py.image.save_as(choro_map, filename=second_path)
         return first_path, second_path
 
-
-# filename = 'C:\\Users\\roman\\GitHub\\KMeansClustering\\Dataset.xlsx'
-# k = KMeansClustering(filename)
-# k.kmeans(3, 10)
