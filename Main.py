@@ -83,20 +83,20 @@ class Main:
 
             if self.k_cluster < 2 or self.k_cluster > 260 or self.run_number < 1 or self.run_number > 100:
                 raise ValueError
+            self.photo1_path, self.photo2_path = self.k_means_clustering.kmeans(self.k_cluster, self.run_number)
+            image1 = Image.open(self.photo1_path)
+            image2 = Image.open(self.photo2_path)
+            self.photo1 = ImageTk.PhotoImage(image1)
+            self.photo2 = ImageTk.PhotoImage(image2)
+            self.photo1_label = Label(root, image=self.photo1)
+            self.photo2_label = Label(root, image=self.photo2)
+            self.photo1_label.grid(row=5, column=0, sticky=E)
+            self.photo2_label.grid(row=5, column=1, sticky=W)
+            messagebox.showinfo(title="K Means Clustering", message="Clustering completed successfully!")
+            sys.exit()
         except ValueError:
             showerror("K Means Clustering", message=str("Please enter valid numbers in Number of clusters k or Number "
                                                         "of runs"))
-        self.photo1_path, self.photo2_path = self.k_means_clustering.kmeans(self.k_cluster, self.run_number)
-        image1 = Image.open(self.photo1_path)
-        image2 = Image.open(self.photo2_path)
-        self.photo1 = ImageTk.PhotoImage(image1)
-        self.photo2 = ImageTk.PhotoImage(image2)
-        self.photo1_label = Label(root, image=self.photo1)
-        self.photo2_label = Label(root, image=self.photo2)
-        self.photo1_label.grid(row=5, column=0, sticky=E)
-        self.photo2_label.grid(row=5, column=1, sticky=W)
-        messagebox.showinfo(title="K Means Clustering", message="Clustering completed successfully!")
-        sys.exit()
 
 
 root = Tk()
